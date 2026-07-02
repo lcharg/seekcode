@@ -1,0 +1,48 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(docs/report_v1.md)",
+      "Write(docs/report_v1.md)"
+    ],
+    "ask": [
+      "Edit(docs/CONSTITUTION.md)",
+      "Write(docs/CONSTITUTION.md)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/future-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/commit-gate.sh\"",
+            "timeout": 600
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/spec-anchor-check.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

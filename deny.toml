@@ -1,0 +1,32 @@
+# cargo-deny 配置 —— 宪章 2.3(依赖门槛)的机检落点
+# license 允许表与 ban 清单的变更走 PR 评审;放宽视同宪章数值条款(6.2)。
+
+[licenses]
+# 宪章 2.3 允许表
+allow = [
+  "MIT",
+  "Apache-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "Zlib",
+  "Unicode-3.0",
+  "Unicode-DFS-2016",
+]
+
+[bans]
+multiple-versions = "warn"
+deny = [
+  # ADR-005:MVP 持久化为 JSONL,rusqlite 出现即违章
+  { crate = "rusqlite", reason = "ADR-005: MVP 用 JSONL;SQLite 须以 SessionStore 第二实现引入并更新 ADR" },
+  # 宪章 2.1:anyhow 只允许出现在 bin(经 seekcode 引入即豁免)
+  { crate = "anyhow", wrappers = ["seekcode"], reason = "宪章 2.1: anyhow 仅限 bin crate" },
+  # report_v2 §6.1 排除项
+  { crate = "async-openai", reason = "report_v2 §6.1: 仅 OpenAI 规格,不作 provider 抽象" },
+]
+
+[advisories]
+yanked = "deny"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"

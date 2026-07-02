@@ -1,0 +1,25 @@
+# FUTURE/D 禁区关键词表(宪章 1.2 / 1.4;随 docs/FUTURE.md 与 report_v2 §9 更新)
+# 每行一个 grep -iE 模式;# 开头为注释。命中即 future-guard 拒绝写入。
+# --- F1/F2 学习型路由 ---
+LearnedRouter
+learned_rout
+routellm
+# --- F3 能力探针(spec v2 已移除 ProfileSource::Probed)---
+CapabilityProbe
+capability_probe
+probe_code_gen
+ProfileSource::Probed
+# --- F4 语义验证 / LLM 评审员 ---
+LlmJudge
+llm_judge
+llm.as.judge
+SemanticVerif
+semantic_verif
+# --- D2 预估成本降档(只允许实付累计)---
+est_cost
+estimated_cost
+EstimatedCost
+# --- D3 运行时热插件 ---
+libloading
+hot_swap
+hot_reload_plugin
